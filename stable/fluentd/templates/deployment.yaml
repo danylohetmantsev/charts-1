@@ -12,6 +12,9 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
+{{- if .Values.autoscaling.enabled}}
+  serviceName: {{ template "fluentd.fullname" . }}
+{{- end}}
 {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
 {{- end }}
